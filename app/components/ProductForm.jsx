@@ -1,7 +1,9 @@
 import {Link} from '@remix-run/react';
 import {VariantSelector} from '@shopify/hydrogen';
+import {useState} from 'react';
 import {AddToCartButton} from '~/components/AddToCartButton';
 import {useAside} from '~/components/Aside';
+import {PlanPicker} from './PlanPicker';
 
 /**
  * @param {{
@@ -12,6 +14,9 @@ import {useAside} from '~/components/Aside';
  */
 export function ProductForm({product, selectedVariant, variants}) {
   const {open} = useAside();
+
+  const [selectedSellingPlan, setSelectedSellingPlan] = useState(null);
+
   return (
     <div className="product-form">
       <VariantSelector
@@ -21,6 +26,14 @@ export function ProductForm({product, selectedVariant, variants}) {
       >
         {({option}) => <ProductOptions key={option.name} option={option} />}
       </VariantSelector>
+      <br />
+      {/* SKIO */}
+      <PlanPicker
+        selectedVariant={selectedVariant}
+        selectedSellingPlan={selectedSellingPlan}
+        onPlanChange={(sp) => setSelectedSellingPlan(sp)}
+      />
+      {/* END: SKIO */}
       <br />
       <AddToCartButton
         disabled={!selectedVariant || !selectedVariant.availableForSale}
@@ -33,6 +46,9 @@ export function ProductForm({product, selectedVariant, variants}) {
                 {
                   merchandiseId: selectedVariant.id,
                   quantity: 1,
+                  ...(selectedSellingPlan && {
+                    sellingPlanId: selectedSellingPlan.id,
+                  }),
                   selectedVariant,
                 },
               ]

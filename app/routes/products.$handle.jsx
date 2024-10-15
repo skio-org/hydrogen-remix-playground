@@ -231,6 +231,60 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
       amount
       currencyCode
     }
+    sellingPlanAllocations(first: 30) {
+      nodes {
+        sellingPlan {
+          id
+          name
+          priceAdjustments {
+            orderCount
+            adjustmentValue {
+             	... on SellingPlanFixedAmountPriceAdjustment {
+              	adjustmentAmount {
+                	amount
+                	currencyCode
+              	}
+            	}
+              ... on SellingPlanPercentagePriceAdjustment {
+              	adjustmentPercentage
+            	}
+              ... on SellingPlanFixedPriceAdjustment {
+              	price {
+                  amount
+                  currencyCode
+                }
+            	}
+            }
+          }
+          options {
+            name
+            value
+          }
+        }
+        checkoutChargeAmount {
+          amount
+          currencyCode
+        }
+        priceAdjustments {
+          price {
+            amount
+            currencyCode
+          }
+          compareAtPrice {
+            amount
+            currencyCode
+          }
+          perDeliveryPrice {
+            amount
+            currencyCode
+          }
+          unitPrice {
+            amount
+            currencyCode
+          }
+        }
+      }
+    }
   }
 `;
 
@@ -257,6 +311,24 @@ const PRODUCT_FRAGMENT = `#graphql
     seo {
       description
       title
+    }
+    sellingPlanGroups(first: 3) {
+      nodes {
+        appName
+        name
+        sellingPlans(first: 30) {
+          nodes {
+            id
+            name
+            description
+            recurringDeliveries
+            options {
+              name
+              value
+            }
+          }
+        }
+      }
     }
   }
   ${PRODUCT_VARIANT_FRAGMENT}

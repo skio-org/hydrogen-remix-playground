@@ -22,6 +22,16 @@ export const CART_QUERY_FRAGMENT = `#graphql
         ...Money
       }
     }
+    sellingPlanAllocation {
+      sellingPlan {
+        id
+        name
+        options {
+          name
+          value
+        }
+      }
+    }
     merchandise {
       ... on ProductVariant {
         id
@@ -61,6 +71,16 @@ export const CART_QUERY_FRAGMENT = `#graphql
     attributes {
       key
       value
+    }
+    sellingPlanAllocation {
+      sellingPlan {
+        id
+        name
+        options {
+          name
+          value
+        }
+      }
     }
     cost {
       totalAmount {
