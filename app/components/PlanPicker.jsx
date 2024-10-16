@@ -83,6 +83,7 @@ export function PlanPicker({
           onChange={() => setPurchaseType(PURCHASE_TYPE_LABELS.SUBSCRIPTION)}
         />
         {GENERAL_LABELS.SUBSCRIBE}{' '}
+        {/* TODO: Add handling of each price adjustment type */}
         {
           defaultSellingPlanAllocation.sellingPlan.priceAdjustments[0]
             .adjustmentValue.adjustmentPercentage

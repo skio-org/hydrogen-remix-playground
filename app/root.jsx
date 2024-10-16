@@ -11,7 +11,7 @@ import {
   isRouteErrorResponse,
 } from '@remix-run/react';
 import favicon from '~/assets/favicon.svg';
-// import resetStyles from '~/styles/reset.css?url';
+import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import tailwindCss from './styles/tailwind.css?url';
 import {PageLayout} from '~/components/PageLayout';
@@ -39,7 +39,7 @@ export const shouldRevalidate = ({
 export function links() {
   return [
     {rel: 'stylesheet', href: tailwindCss},
-    // {rel: 'stylesheet', href: resetStyles},
+    {rel: 'stylesheet', href: resetStyles},
     {rel: 'stylesheet', href: appStyles},
     {
       rel: 'preconnect',
